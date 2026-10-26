@@ -47,6 +47,27 @@
                 </a>
             </div>
 
+            <!-- Search Box -->
+            <div class="row mb-3">
+                <div class="col-md-6 col-lg-5">
+                    <form th:action="@{/employees}" method="get" class="d-flex">
+                        <div class="input-group">
+                            <span class="input-group-text bg-white border-end-0">
+                                <i class="bi bi-search text-muted"></i>
+                            </span>
+                            <input type="text" name="keyword" th:value="${keyword}"
+                                   class="form-control border-start-0 ps-0"
+                                   placeholder="Search by name..." />
+                            <button class="btn btn-primary" type="submit">Search</button>
+                            <a th:if="${keyword != null and !#strings.isEmpty(keyword)}"
+                               th:href="@{/employees}" class="btn btn-outline-secondary" title="Reset Search">
+                                <i class="bi bi-x-circle"></i> Clear
+                            </a>
+                        </div>
+                    </form>
+                </div>
+            </div>
+
             <div class="table-responsive">
                 <table class="table table-hover align-middle">
                     <thead>

@@ -34,4 +34,11 @@ public class EmployeeService {
     public boolean existsByEmail(String email) {
         return employeeRepository.existsByEmail(email);
     }
+
+    public List<Employee> searchEmployees(String keyword) {
+        if (keyword != null && !keyword.trim().isEmpty()) {
+            return employeeRepository.findByFullNameContainingIgnoreCase(keyword.trim());
+        }
+        return employeeRepository.findAll();
+    }
 }
