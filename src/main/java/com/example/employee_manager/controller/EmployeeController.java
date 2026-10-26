@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.example.employee_manager.model.Employee;
 import com.example.employee_manager.service.EmployeeService;
@@ -22,10 +23,11 @@ public class EmployeeController {
         this.employeeService = employeeService;
     }
 
-    // 1. Display list of employees (Read)
+    // 1. Display list of employees (Read & Search)
     @GetMapping({"/", "/employees"})
-    public String viewHomePage(Model model) {
-        model.addAttribute("employees", employeeService.getAllEmployees());
+    public String viewHomePage(@RequestParam(value = "keyword", required = false) String keyword, Model model) {
+        model.addAttribute("employees", employeeService.searchEmployees(keyword));
+        model.addAttribute("keyword", keyword);
         return "index";
     }
 

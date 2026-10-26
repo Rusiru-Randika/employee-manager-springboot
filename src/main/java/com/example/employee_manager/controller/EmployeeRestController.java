@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.example.employee_manager.model.Employee;
@@ -28,10 +29,10 @@ public class EmployeeRestController {
         this.employeeService = employeeService;
     }
 
-    // READ ALL: GET http://localhost:8080/api/employees
+    // READ ALL / SEARCH: GET http://localhost:8080/api/employees?keyword=John
     @GetMapping
-    public List<Employee> getAllEmployees() {
-        return employeeService.getAllEmployees();
+    public List<Employee> getAllEmployees(@RequestParam(value = "keyword", required = false) String keyword) {
+        return employeeService.searchEmployees(keyword);
     }
 
     // READ ONE: GET http://localhost:8080/api/employees/{id}
